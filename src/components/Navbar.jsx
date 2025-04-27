@@ -9,7 +9,7 @@ import { useAppContext } from '../context/AppContext';
 const Navbar = () => {
 
  const [open, setOpen] = React.useState(false);
- const {user , setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery} = useAppContext();
+ const {user , setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery,  getCartCount} = useAppContext();
 
  const logOut =  async ()=>{
     setUser(null);
@@ -44,7 +44,7 @@ const Navbar = () => {
                     {/*  cart */}
                     <div onClick={()=> navigate("/cart")} className="relative cursor-pointer">
                         <img src={assets.nav_cart_icon} alt="Cart Image" className='w-6 opacity-80 ' />
-                        <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">3</button>
+                        <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
                     </div>
                     
                     {/* button */}
@@ -62,11 +62,20 @@ const Navbar = () => {
                         </div>
                     )} 
                 </div>
-    
-                <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="sm:hidden">
+
+                <div className='flex items-center gap-6 sm:hidden'>
+                    <div onClick={()=> navigate("/cart")} className="relative cursor-pointer">
+                        <img src={assets.nav_cart_icon} alt="Cart Image" className='w-6 opacity-80 ' />
+                        <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[16px] h-[16px] rounded-full">{getCartCount()}</button>
+                    </div>
+
+                    <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" >
                     {/* Menu Icon  */}
                     {open ?  <MdClose size={28} color='#44ae7c'/> : <CgMenuRightAlt size={28} color='#44ae7c'/>}
-                </button>
+                    </button>
+                </div>
+    
+    
     
                 {/* Mobile Menu */}
                 { open && (

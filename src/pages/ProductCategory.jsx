@@ -17,12 +17,18 @@ const ProductCategory = () => {
         <div className='flex flex-col items-end w-max'>
           <p className='text-2xl font-medium'>{searchCategory.text.toUpperCase()}</p>
           <div className='w-16 h-0.5 bg-primary rounded-full'></div>
-          
-          <div>
-          {filteredProducts.map((product, index)=>(
-              <ProductCard key={index}  product={product}/>
+        </div>
+      )}
+
+      {filteredProducts.length > 0 ? (
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-6  mt-6'>
+          {filteredProducts.map((product)=>(
+              <ProductCard key={product._id}  product={product}/>
           ))}
-          </div>
+        </div>
+      ): (
+        <div className='flex items-center justify-center h-[60vh]'>
+          <p className='text-2xl font-medium text-primary'> No Products Found in this Category</p>
         </div>
       )}
     </div>
